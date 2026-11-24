@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+    <div><h2 class="fw-bold mb-1">Hello, {{ current_user.name }} 👋</h2><p class="text-secondary mb-0">Your career analysis dashboard.</p></div>
+    <a class="btn btn-primary" href="{{ url_for('upload') }}">+ Analyze Resume</a>
+</div>
+<div class="row g-3 mb-4">
+    <div class="col-md-4"><div class="stat-card"><small>Analyses</small><strong>{{ total }}</strong></div></div>
+    <div class="col-md-4"><div class="stat-card"><small>Average Resume Score</small><strong>{{ avg }}%</strong></div></div>
+    <div class="col-md-4"><div class="stat-card"><small>Latest Status</small><strong>{{ "Ready" if total else "Start" }}</strong></div></div>
+</div>
+<div class="card app-card">
+<div class="card-body">
+    <div class="d-flex justify-content-between align-items-center"><h5 class="fw-bold">Recent Analyses</h5><a href="{{ url_for('history') }}">View all</a></div>
+    {% if analyses %}
+    <div class="table-responsive">
+    <table class="table align-middle mt-3">
+        <thead><tr><th>Resume</th><th>Score</th><th>ATS</th><th>Date</th><th></th></tr></thead>
+        <tbody>
+        {% for a in analyses %}
+        <tr><td>{{ a.filename }}</td><td><span class="score-pill">{{ a.score }}%</span></td><td>{{ a.ats_score }}%</td><td>{{ a.created_at }}</td><td><a class="btn btn-sm btn-outline-primary" href="{{ url_for('analysis', analysis_id=a.id) }}">Open</a></td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    {% else %}
+    <div class="empty-state"><div class="display-6">📄</div><h5>No resume analyzed yet</h5><p class="text-secondary">Upload your first resume to generate your report.</p><a class="btn btn-primary" href="{{ url_for('upload') }}">Upload Resume</a></div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}

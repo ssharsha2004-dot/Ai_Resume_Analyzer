@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Job Match{% endblock %}
+{% block content %}
+<div class="row g-4">
+<div class="col-lg-5">
+<div class="card app-card">
+<div class="card-body p-4">
+<h3 class="fw-bold">🎯 Job Matcher</h3>
+<p class="text-secondary">Paste a job description and compare it with your latest analyzed resume.</p>
+<form method="post">
+<label class="form-label">Job Title</label>
+<input class="form-control" name="title" value="{{ form.title }}" placeholder="e.g. Python Developer" required>
+<label class="form-label mt-3">Job Description</label>
+<textarea class="form-control" name="description" rows="13" placeholder="Paste the complete job description here..." required>{{ form.description }}</textarea>
+<button class="btn btn-primary w-100 mt-3">Analyze Match</button>
+</form>
+</div>
+</div>
+</div>
+<div class="col-lg-7">
+{% if result %}
+<div class="score-card mb-4"><small>Match Score</small><div class="big-score">{{ result.score }}<span>%</span></div><div class="progress"><div class="progress-bar" style="width:{{ result.score }}%"></div></div></div>
+<div class="row g-4">
+<div class="col-md-6"><div class="card app-card h-100"><div class="card-body"><h5 class="fw-bold">✅ Matched Skills</h5><div class="tag-wrap">{% for s in result.matched %}<span class="tag">{{ s }}</span>{% else %}<span class="text-secondary">None detected</span>{% endfor %}</div></div></div></div>
+<div class="col-md-6"><div class="card app-card h-100"><div class="card-body"><h5 class="fw-bold">❌ Missing Skills</h5><div class="tag-wrap">{% for s in result.missing %}<span class="tag missing">{{ s }}</span>{% else %}<span class="text-secondary">None detected</span>{% endfor %}</div></div></div></div>
+</div>
+{% else %}
+<div class="empty-state card app-card"><div class="display-5">🎯</div><h5>Ready to compare</h5><p class="text-secondary">Analyze a resume first, then paste a job description here.</p></div>
+{% endif %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+<div class="col-lg-7">
+<div class="card app-card">
+<div class="card-body p-4">
+<h2 class="fw-bold">👤 Profile</h2>
+<form method="post">
+<label class="form-label mt-3">Name</label>
+<input class="form-control" name="name" value="{{ profile.name }}" required>
+<label class="form-label mt-3">Email</label>
+<input class="form-control" value="{{ profile.email }}" disabled>
+<label class="form-label mt-3">Career Goal</label>
+<input class="form-control" name="career_goal" value="{{ profile.career_goal or '' }}" placeholder="e.g. Backend Developer">
+<button class="btn btn-primary mt-4">Save Profile</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

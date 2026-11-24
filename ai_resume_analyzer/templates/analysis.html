@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Resume Analysis{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+<div><h2 class="fw-bold">Resume Analysis</h2><p class="text-secondary mb-0">{{ analysis.filename }} · {{ analysis.created_at }}</p></div>
+<a class="btn btn-primary" href="{{ url_for('job_match') }}">Match With Job</a>
+</div>
+
+<div class="row g-4">
+<div class="col-md-6"><div class="score-card"><small>Overall Resume Score</small><div class="big-score">{{ analysis.score }}<span>/100</span></div><div class="progress"><div class="progress-bar" style="width:{{ analysis.score }}%"></div></div></div></div>
+<div class="col-md-6"><div class="score-card"><small>ATS-style Keyword Score</small><div class="big-score">{{ analysis.ats_score }}<span>%</span></div><div class="progress"><div class="progress-bar" style="width:{{ analysis.ats_score }}%"></div></div></div></div>
+
+<div class="col-lg-6"><div class="card app-card h-100"><div class="card-body"><h5 class="fw-bold">🛠 Skills Detected</h5><div class="tag-wrap">{% for s in analysis.skills %}<span class="tag">{{ s }}</span>{% else %}<span class="text-secondary">No skills detected.</span>{% endfor %}</div></div></div></div>
+
+<div class="col-lg-6"><div class="card app-card h-100"><div class="card-body"><h5 class="fw-bold">💪 Strengths</h5><ul>{% for x in analysis.strengths %}<li class="mb-2">{{ x }}</li>{% endfor %}</ul></div></div></div>
+
+<div class="col-lg-6"><div class="card app-card h-100"><div class="card-body"><h5 class="fw-bold">⚠️ Areas to Improve</h5><ul>{% for x in analysis.weaknesses %}<li class="mb-2">{{ x }}</li>{% endfor %}</ul></div></div></div>
+
+<div class="col-lg-6"><div class="card app-card h-100"><div class="card-body"><h5 class="fw-bold">✨ Suggestions</h5><ul>{% for x in analysis.suggestions %}<li class="mb-2">{{ x }}</li>{% endfor %}</ul></div></div></div>
+</div>
+{% endblock %}

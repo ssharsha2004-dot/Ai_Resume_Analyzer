@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}AI Resume Analyzer{% endblock %}
+{% block content %}
+<section class="hero py-5">
+    <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+            <span class="badge rounded-pill text-bg-light mb-3">AI-powered career toolkit</span>
+            <h1 class="display-4 fw-bold">Turn your resume into a smarter career plan.</h1>
+            <p class="lead text-secondary my-4">Upload your resume, analyze its strengths, identify gaps, compare it with job descriptions, and prepare for interviews.</p>
+            <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-2">Start Analyzing</a>
+            <a href="{{ url_for('login') }}" class="btn btn-outline-dark btn-lg">Login</a>
+        </div>
+        <div class="col-lg-5">
+            <div class="glass-card score-preview">
+                <div class="d-flex justify-content-between"><span>Resume Score</span><strong>82/100</strong></div>
+                <div class="progress my-3"><div class="progress-bar" style="width:82%"></div></div>
+                <div class="mini-grid">
+                    <div><small>ATS</small><b>87%</b></div>
+                    <div><small>Skills</small><b>14</b></div>
+                    <div><small>Job Match</small><b>84%</b></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <h2 class="fw-bold text-center mb-4">Everything you need in one place</h2>
+    <div class="row g-4">
+        {% for icon,title,desc in [
+            ("📄","Resume Analysis","Extract resume information and get a structured report."),
+            ("🎯","Job Matching","Compare your resume with a target job description."),
+            ("🧠","Skill Gap","Find relevant skills that are missing from your resume."),
+            ("✍️","AI Improvements","Get suggestions for stronger resume content."),
+            ("🎤","Interview Prep","Generate interview questions based on your target role."),
+            ("📊","Progress History","Keep track of previous resume analyses.")
+        ] %}
+        <div class="col-md-6 col-lg-4">
+            <div class="feature-card h-100"><div class="feature-icon">{{ icon }}</div><h5>{{ title }}</h5><p class="text-secondary mb-0">{{ desc }}</p></div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Analyze Resume{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+<div class="col-lg-8">
+<div class="card app-card">
+<div class="card-body p-4 p-md-5">
+<h2 class="fw-bold">Analyze your resume</h2>
+<p class="text-secondary">Upload a PDF or DOCX file. The current version analyzes it locally and does not require a paid AI service.</p>
+<form method="post" enctype="multipart/form-data">
+    <div class="upload-box my-4">
+        <div class="display-5">📄</div>
+        <h5>Drop your resume here</h5>
+        <p class="text-secondary">PDF or DOCX · Maximum 10 MB</p>
+        <input class="form-control" type="file" name="resume" accept=".pdf,.docx" required>
+    </div>
+    <button class="btn btn-primary w-100 btn-lg">Analyze Resume</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
